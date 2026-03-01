@@ -411,8 +411,8 @@ input{
   <div class="container">
 
 <div id="login">
-<h1>🔒</h1>
-<h2>Digite a senha para acessar</h2>
+<h1>Trancado pae</h1>
+<h2>Digite a senha para acessar(easy)</h2>
 <p class="subtitle">Formato: DDMMAA</p>
 
 <div class="input-container">
@@ -447,7 +447,7 @@ input{
 </div>
 
 <div id="conteudoSurpresa" class="hidden">
-<h3>Coisas que eu adoro/gosto em você</h3>
+<h3>Pequenos detalhes seus que me deixam fraco</h3>
 <p id="textoSurpresa"></p>
 <button onclick="sortearSurpresa()">Reroll</button>
 <button onclick="voltar()">Back</button>
@@ -467,7 +467,7 @@ input{
 </div>
 
 <div id="conteudoMensagem" class="hidden">
-<h3>Coisas que eu adoro/gosto em você</h3>
+<h3>Algo que eu penso mais do que deveria…</h3>
 <p id="textoMensagem"></p>
 <button onclick="sortearMensagem()">Reroll</button>
 <button onclick="voltar()">Back</button>
@@ -518,7 +518,7 @@ function verificarSenha(){
     }
     tentativas++;
     erroSenha.innerText = "Senha incorreta.";
-    if(tentativas===1) dica.innerText="Dica 1: O único mês que nunca chega a 30.";
+    if(tentativas===1) dica.innerText="Dica 1: O único mês que tem 28 dias.";
     if(tentativas===2) dica.innerText="Dica 2: Metade do mês mais curto.";
     if(tentativas===3) dica.innerText="Dica 3: Adicione mais um dia.";
 }
@@ -628,3 +628,4 @@ home.classList.remove("hidden");
   </script>
 </body>
 </html>
+
