@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600;700&display=swap');
+
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background: linear-gradient(135deg,#ff9ecf,#a18cd1,#fbc2eb,#ffd6e8);
+    background-size:400% 400%;
+    animation:gradientFlow 14s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+    position:relative;
+}
+
+@keyframes gradientFlow{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* PARTÍCULAS */
+.particle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:rgba(255,255,255,0.6);
+    border-radius:50%;
+    animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+    from{ transform:translateY(100vh) scale(0.5); opacity:0;}
+    20%{opacity:1;}
+    to{ transform:translateY(-10vh) scale(1.2); opacity:0;}
+}
+
+/* PÉTALAS */
+.petala{
+    position:absolute;
+    width:18px;
+    height:18px;
+    background: radial-gradient(circle at 30% 30%, #ffd6eb, #ff8fc4);
+    border-radius:60% 40% 60% 40%;
+    opacity:0.8;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    0%{ transform:translateY(-10vh) rotate(0deg); }
+    100%{ transform:translateY(110vh) rotate(360deg); }
+}
+
+.container{
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(25px);
+    padding:60px 45px;
+    border-radius:35px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.25);
+    text-align:center;
+    width:92%;
+    max-width:520px;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.container::after{
+    content:"";
+    position:absolute;
+    inset:-40px;
+    background:radial-gradient(circle at center, rgba(255,220,240,0.3), transparent 70%);
+    z-index:-1;
+    filter:blur(40px);
+}
+
+h1{
+    font-family:'Playfair Display', serif;
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+h2,h3{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+}
+
+.subtitle{
+    font-weight:300;
+    margin-bottom:35px;
+    opacity:0.95;
+}
+
+button{
+    padding:13px 26px;
+    border-radius:30px;
+    border:none;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ffffff,#ffe0f2);
+    color:#d63384;
+    transition:all 0.4s ease;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    margin:8px;
+}
+
+button:hover{
+    transform:translateY(-6px) scale(1.07);
+    background:linear-gradient(135deg,#ff4da6,#ff85c1);
+    color:white;
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+.hidden{ display:none; }
+
+.input-container{ position:relative; display:inline-block; }
+input{
+    padding:14px 45px 14px 15px;
+    border-radius:25px;
+    border:none;
+    text-align:center;
+    font-size:18px;
+    margin-top:12px;
+    width:220px;
+    outline:none;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+.eye{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+}
+
+#caixa{
+    font-size:75px;
+    cursor:pointer;
+    transition:0.4s ease;
+}
+#caixa:hover{
+    transform:scale(1.1);
+}
+
+.shake{ animation:shake 0.4s; }
+
+@keyframes shake{
+    0%{ transform:translateX(0); }
+    25%{ transform:translateX(-6px); }
+    50%{ transform:translateX(6px); }
+    75%{ transform:translateX(-6px); }
+    100%{ transform:translateX(0); }
+}
+
+.open{ animation:openBox 0.6s forwards; }
+
+@keyframes openBox{
+    0%{ transform:scale(1) rotate(0deg); opacity:1; }
+    50%{ transform:scale(1.4) rotate(20deg); }
+    100%{ transform:scale(0) rotate(30deg); opacity:0; }
+}
+
+.cartas{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-top:20px;
+}
+
+.carta{
+    width:85px;
+    height:125px;
+    background:linear-gradient(145deg,#ffffff,#ffe6f5);
+    border-radius:20px;
+    box-shadow:0 15px 25px rgba(0,0,0,0.2);
+    cursor:pointer;
+    transition:0.4s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    color:#d63384;
+}
+
+.carta:hover{
+    transform:translateY(-12px) scale(1.08);
+    box-shadow:0 20px 35px rgba(0,0,0,0.3);
+}
+
+#slot{
+    font-size:60px;
+    margin:25px 0;
+    letter-spacing:8px;
+}
+
+#resultadoSlot{
+    margin-top:20px;
+    font-weight:500;
+    white-space:pre-line;
+    padding:10px;
+}
+
+@media(max-width:480px){
+    .container{
+        padding:45px 25px;
+        border-radius:25px;
+    }
+    h1{ font-size:34px; }
+}@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600;700&display=swap');
+
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background: linear-gradient(135deg,#ff9ecf,#a18cd1,#fbc2eb);
+    background-size:400% 400%;
+    animation:gradientFlow 12s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+@keyframes gradientFlow{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(25px);
+    padding:60px 45px;
+    border-radius:35px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.25);
+    text-align:center;
+    width:92%;
+    max-width:520px;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%);
+    top:-100px;
+    right:-100px;
+    border-radius:50%;
+    filter:blur(40px);
+}
+
+h1{
+    font-family:'Playfair Display', serif;
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+h2,h3{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+}
+
+.subtitle{
+    font-weight:300;
+    margin-bottom:35px;
+    opacity:0.95;
+}
+
+button{
+    padding:13px 26px;
+    border-radius:30px;
+    border:none;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ffffff,#ffe0f2);
+    color:#d63384;
+    transition:all 0.4s ease;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+    margin:8px;
+}
+
+button:hover{
+    transform:translateY(-6px) scale(1.07);
+    background:linear-gradient(135deg,#ff4da6,#ff85c1);
+    color:white;
+    box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+.hidden{ display:none; }
+
+/* INPUT */
+.input-container{ position:relative; display:inline-block; }
+input{
+    padding:14px 45px 14px 15px;
+    border-radius:25px;
+    border:none;
+    text-align:center;
+    font-size:18px;
+    margin-top:12px;
+    width:220px;
+    outline:none;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+.eye{
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+}
+
+/* CAIXA */
+#caixa{
+    font-size:75px;
+    cursor:pointer;
+    transition:0.4s ease;
+}
+#caixa:hover{
+    transform:scale(1.1);
+}
+
+.shake{ animation:shake 0.4s; }
+
+@keyframes shake{
+    0%{ transform:translateX(0); }
+    25%{ transform:translateX(-6px); }
+    50%{ transform:translateX(6px); }
+    75%{ transform:translateX(-6px); }
+    100%{ transform:translateX(0); }
+}
+
+.open{ animation:openBox 0.6s forwards; }
+
+@keyframes openBox{
+    0%{ transform:scale(1) rotate(0deg); opacity:1; }
+    50%{ transform:scale(1.4) rotate(20deg); }
+    100%{ transform:scale(0) rotate(30deg); opacity:0; }
+}
+
+/* CARTAS */
+.cartas{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-top:20px;
+}
+
+.carta{
+    width:85px;
+    height:125px;
+    background:linear-gradient(145deg,#ffffff,#ffe6f5);
+    border-radius:20px;
+    box-shadow:0 15px 25px rgba(0,0,0,0.2);
+    cursor:pointer;
+    transition:0.4s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    color:#d63384;
+}
+
+.carta:hover{
+    transform:translateY(-12px) scale(1.08);
+    box-shadow:0 20px 35px rgba(0,0,0,0.3);
+}
+
+#slot{
+    font-size:60px;
+    margin:25px 0;
+    letter-spacing:8px;
+}
+
+#resultadoSlot{
+    margin-top:20px;
+    font-weight:500;
+    white-space:pre-line;
+    padding:10px;
+}
+
+@media(max-width:480px){
+    .container{
+        padding:45px 25px;
+        border-radius:25px;
+    }
+    h1{ font-size:34px; }
+}
+  </style>
+
+  
+</head>
+<body>
+  <div class="container">
+
+<div id="login">
+<h1>🔒</h1>
+<h2>Digite a senha para acessar</h2>
+<p class="subtitle">Formato: DDMMAA</p>
+
+<div class="input-container">
+<input type="password" id="senhaInput" maxlength="6">
+<span class="eye" onclick="toggleSenha()">👁</span>
+</div>
+
+<br>
+<button onclick="verificarSenha()">Entrar</button>
+
+<p id="erroSenha"></p>
+<p id="dica"></p>
+</div>
+
+<div id="site" class="hidden">
+
+<div id="home">
+<h1>Happy Birthday Bolinha &lt;3</h1>
+<p class="subtitle">Choose wisely...</p>
+<button onclick="mostrar('surpresa')">1</button>
+<button onclick="mostrar('mensagem')">2</button>
+<button onclick="mostrar('cassino')">3</button>
+</div>
+
+<div id="surpresa" class="hidden">
+<h2>Surprise</h2>
+
+<div id="miniGameSurpresa">
+<p>Clique na caixa para abrir...</p>
+<div id="caixa" onclick="abrirCaixa()">🎁</div>
+<p id="progressoCaixa"></p>
+</div>
+
+<div id="conteudoSurpresa" class="hidden">
+<h3>Coisas que eu adoro/gosto em você</h3>
+<p id="textoSurpresa"></p>
+<button onclick="sortearSurpresa()">Reroll</button>
+<button onclick="voltar()">Back</button>
+</div>
+</div>
+
+<div id="mensagem" class="hidden">
+<h2>Message</h2>
+
+<div id="miniGameMensagem">
+<p>Escolha uma carta...</p>
+<div class="cartas">
+<div class="carta" onclick="revelarCarta(this)">❤</div>
+<div class="carta" onclick="revelarCarta(this)">❤</div>
+<div class="carta" onclick="revelarCarta(this)">❤</div>
+</div>
+</div>
+
+<div id="conteudoMensagem" class="hidden">
+<h3>Coisas que eu adoro/gosto em você</h3>
+<p id="textoMensagem"></p>
+<button onclick="sortearMensagem()">Reroll</button>
+<button onclick="voltar()">Back</button>
+</div>
+</div>
+
+<div id="cassino" class="hidden">
+<h2>Secret Slot</h2>
+<div id="slot">❔ ❔ ❔</div>
+<p id="resultadoSlot"></p>
+<button onclick="girar()">Spin</button>
+<button onclick="voltar()">Back</button>
+</div>
+
+</div>
+</div>
+
+  <script>
+    for(let i=0;i<30;i++){
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(8+Math.random()*6)+"s";
+    document.body.appendChild(p);
+}
+for(let i=0;i<20;i++){
+    let pet=document.createElement("div");
+    pet.className="petala";
+    pet.style.left=Math.random()*100+"vw";
+    pet.style.animationDuration=(10+Math.random()*8)+"s";
+    document.body.appendChild(pet);
+}/* SEU SCRIPT ORIGINAL COMPLETO — INTACTO */
+
+function toggleSenha(){
+    const input = document.getElementById("senhaInput");
+    input.type = input.type === "password" ? "text" : "password";
+}
+
+let tentativas = 0;
+const senhaCorreta = "150226";
+
+function verificarSenha(){
+    const input = document.getElementById("senhaInput").value;
+    if(input === senhaCorreta){
+        login.classList.add("hidden");
+        site.classList.remove("hidden");
+        return;
+    }
+    tentativas++;
+    erroSenha.innerText = "Senha incorreta.";
+    if(tentativas===1) dica.innerText="Dica 1: O único mês que nunca chega a 30.";
+    if(tentativas===2) dica.innerText="Dica 2: Metade do mês mais curto.";
+    if(tentativas===3) dica.innerText="Dica 3: Adicione mais um dia.";
+}
+
+const surpresas=[ "Seu sorriso me deixa calmo.",
+"Sinto paz estando cntg (ate certo ponto porq voce nao fica queita).",
+"O jeito que você me olha( preciso dizer?).",
+"Seu abraço (necessito).",
+"O quanto minha vida ficou melhor depois de você ( nem tanto, brincadeira).",
+"Seu coraçao enorme e generoso ate demais(mesmo sendo so meu).",
+"Seu senso de humor que me faz rir ( tirando aura, betinha entre outros ne)",
+"As coisas que voce faz em meus sonhos (fique na sua imaginaçao ou nao...)",
+"Momentos estando cntg sao bons (quando voce nao ta com formiga no corpo).",
+"Seus toques mesmo simples mexem comigo." ];
+
+const mensagens=[ "Se eu pudesse pausar o tempo, eu apenas escolheria todos os momentos em que estou com você.",
+"Entre todas as possibilidades do mundo, a melhor que me aconteceu foi você.( referencia a The World After the Fall).",
+"E se eu tivesse que escolher de novo, escolheria você. Toda vez. Sem hesitar..",
+"Se a minha vida fosse um sistema, você seria a melhor atualização.( esperei minha vida inteira pra fazer essa cantada de prog KKKK)",
+"Você é o meu código favorito. E eu nunca quero dar rollback em nós. ( essa mais ainda KKKK).",
+"Eu te coloco no meu while true ta.",
+"Se você me colocar no seu while(true), prometo te amar porem aviso que posso causar um leve overheat no seu sistema (entenda)." ];
+
+function sortearSurpresa(){
+textoSurpresa.innerText=surpresas[Math.floor(Math.random()*surpresas.length)];
+}
+function sortearMensagem(){
+textoMensagem.innerText=mensagens[Math.floor(Math.random()*mensagens.length)];
+}
+
+let cliquesCaixa=0;
+function abrirCaixa(){
+cliquesCaixa++;
+caixa.classList.add("shake");
+setTimeout(()=>caixa.classList.remove("shake"),400);
+
+if(cliquesCaixa>=4){
+caixa.classList.add("open");
+setTimeout(()=>{
+miniGameSurpresa.classList.add("hidden");
+conteudoSurpresa.classList.remove("hidden");
+sortearSurpresa();
+},600);
+}else{
+progressoCaixa.innerText="Quase lá...";
+}
+}
+
+function revelarCarta(el){
+el.style.background="linear-gradient(135deg,#ff2e93,#ff6ec4)";
+el.style.color="white";
+setTimeout(()=>{
+miniGameMensagem.classList.add("hidden");
+conteudoMensagem.classList.remove("hidden");
+sortearMensagem();
+},500);
+}
+
+const simbolos=["💖","💘","💝","✨","❤️"];
+function girar(){
+resultadoSlot.innerText="Girando...";
+let count=0;
+const intervalo=setInterval(()=>{
+slot.innerText=`${simbolos[Math.floor(Math.random()*5)]} ${simbolos[Math.floor(Math.random()*5)]} ${simbolos[Math.floor(Math.random()*5)]}`;
+count++;
+if(count>15){
+clearInterval(intervalo);
+if(Math.random()<0.18){
+let premios=["💝","✨","💘"];
+let premio=premios[Math.floor(Math.random()*3)];
+slot.innerText=`${premio} ${premio} ${premio}`;
+if(premio==="💝") resultadoSlot.innerText="💝 VALE MASSAGEM 💝\n\nMassagem por um período de tempo ou algo parecido, posso pensar no seu caso";
+if(premio==="✨") resultadoSlot.innerText="✨ VALE PEDIDO ✨\n\nO vale dá direito a escolher qualquer coisa que você queira que eu faça. Farei independentemente do que seja (aproveite, você não ganhará outro tão cedo).";
+if(premio==="💘") resultadoSlot.innerText="💘 1 DIA SEM RECLAMAR 💘\n\nNao reclamo de nada ne, irei concordar com tudo que vossa senhoria desejar.";
+}else{
+resultadoSlot.innerText="Quase...vai novamente pateta";
+}
+}
+},100);
+}
+
+function mostrar(secao){
+home.classList.add("hidden");
+surpresa.classList.add("hidden");
+mensagem.classList.add("hidden");
+cassino.classList.add("hidden");
+document.getElementById(secao).classList.remove("hidden");
+if(secao==="surpresa"){
+cliquesCaixa=0;
+miniGameSurpresa.classList.remove("hidden");
+conteudoSurpresa.classList.add("hidden");
+progressoCaixa.innerText="";
+caixa.classList.remove("open");
+}
+if(secao==="mensagem"){
+miniGameMensagem.classList.remove("hidden");
+conteudoMensagem.classList.add("hidden");
+}
+}
+
+function voltar(){
+surpresa.classList.add("hidden");
+mensagem.classList.add("hidden");
+cassino.classList.add("hidden");
+home.classList.remove("hidden");
+}
+  </script>
+</body>
+</html>
